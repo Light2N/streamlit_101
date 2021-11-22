@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import cv2
-
+import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 menu = ['Home', 'About me', 'Read data', 'Camera']
