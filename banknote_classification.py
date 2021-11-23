@@ -9,12 +9,13 @@ menu = ['Upload a file', 'Capture with your webcam']
 
 choice = st.sidebar.selectbox('Please choose:', menu)
 
-model = tf.keras.models.load_model('model\my_model_save_1.h5')
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001, beta_1=0.9, epsilon=1e-07),
+model = tf.keras.models.load_model('my_model_checkpoint_2.h5')
+model.compile(optimizer=tf.keras.optimizers.Adam(),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 labels = {0:'1000',1:'10000',2:'100000',3:'2000',4:'20000',5:'200000',6:'5000',7:'50000',8:'500000'}
+IMG_SIZE = 224
 
 if choice == 'Upload a file':
     st.header('VND BANKNOTES CLASSIFICATION')
@@ -24,7 +25,7 @@ if choice == 'Upload a file':
     if file_upload != None:     
             image_np = np.asarray(bytearray(file_upload.read()), dtype = np.uint8)    
             img = cv2.imdecode(image_np,1)
-            img = cv2.resize(img,(150,150))
+            img = cv2.resize(img,(IMG_SIZE,IMG_SIZE))
             img_array  = np.expand_dims(img, axis=0)
             prediction = model.predict(img_array)
             pred_indices = np.argmax(prediction, axis = 1)
@@ -61,7 +62,7 @@ if choice == 'Capture with your webcam':
     if  captured_image.all() != None:
         st.write('Image is captured')
         #Resize the Image according with your model
-        captured_image = cv2.resize(captured_image,(150,150))
+        captured_image = cv2.resize(captured_image,(IMG_SIZE,IMG_SIZE))
         #Expand dim to make sure your img_array is (1, Height, Width , Channel ) before plugging into the model
         img_array  = np.expand_dims(captured_image, axis=0)
         #Check the img_array here
