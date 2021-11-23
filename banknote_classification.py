@@ -19,7 +19,7 @@ IMG_SIZE = 224
 
 if choice == 'Upload a file':
     st.header('VND BANKNOTES CLASSIFICATION')
-    st.image('media\VNO-Bank Notes and Change.jpg')
+    st.image('VNO-Bank Notes and Change.jpg')
     file_upload = st.file_uploader('Upload file', type=['jpeg','jpg','png'])
     st.image(file_upload)
     if file_upload != None:     
@@ -35,7 +35,7 @@ if choice == 'Upload a file':
 
 if choice == 'Capture with your webcam':   
     st.header('VND BANKNOTES CLASSIFICATION')
-    st.image('media\VNO-Bank Notes and Change.jpg')
+    st.image('VNO-Bank Notes and Change.jpg')
     cap = cv2.VideoCapture(0)  # device 0
     run = st.button('Refresh')
     capture_button = st.button('Capture')
